@@ -1,30 +1,29 @@
 import React from 'react';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
-
-import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-import Grid from '@material-ui/core/Grid';
-import ButtonBase from '@material-ui/core/ButtonBase';
+import Card from '@material-ui/core/Card';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
-import './App.css';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       flexGrow: 1,
     },
-    paper: {
-      padding: theme.spacing(2),
-      textAlign: 'center',
-      color: theme.palette.text.secondary,
-    },
     img: {
       widht: 100,
-      height: 100
+      height: 100,
+      padding: theme.spacing(1)
     },
     button: {
       margin: theme.spacing(1),
       cursor: 'pointer'
+    },
+    card: {
+      maxWidth: 445,
     },
   }),
 );
@@ -40,33 +39,35 @@ interface ProductProps {
 const Product: React.FC<ProductProps> = ({ name, price, img, description, onSelect }) => {
   const classes = useStyles();
   return (
-    <Paper className={classes.paper}>
-      <Grid item container xs={12} direction="column" spacing={2}>
-        <Grid item xs={12}>
-          <ButtonBase>
-            <img
-              className={classes.img}
-              alt={name}
-              src={img}
-            />
-          </ButtonBase>
-        </Grid>
-        <Grid item xs>
-          <Typography variant="h6">
+    <Card className={classes.card}>
+      <CardActionArea>
+        <CardMedia>
+          <img
+            className={classes.img}
+            alt={name}
+            src={img}
+          />
+        </CardMedia>
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="h2">
             {name}
           </Typography>
-        </Grid>
-        <Grid item container spacing={2}>
-          <Typography variant="h6" style={{ flexGrow: 1 }}>${price}</Typography>
-        </Grid>
-        <Grid item>
-          <Button variant="contained" color="primary" className={classes.button}
-            onClick={() => onSelect()}>
-            Add to cart
+          <Typography variant="body2" color="textSecondary" component="p">
+            {description}
+          </Typography>
+        </CardContent>
+      </CardActionArea>
+      <CardActions style={{ width: '80%', margin: '0 auto' }}>
+        <Typography variant="h6" style={{ flexGrow: 1 }}>
+          ${price}
+        </Typography>
+        <Button variant="contained" color="primary" className={classes.button}
+          onClick={() => onSelect()}>
+          Add to cart
           </Button>
-        </Grid>
-      </Grid>
-    </Paper >
+      </CardActions>
+    </Card>
+
   );
 }
 

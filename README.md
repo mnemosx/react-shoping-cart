@@ -1,44 +1,25 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Shopping cart
 
-## Available Scripts
+## A homework assignment
 
-In the project directory, you can run:
+### Made with React & Typescript and lots of :coffee:
 
-### `npm start`
+### Criteria:
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+* User sees a list of products on the left side;
+* User sees the list of products he has chosen on the right side;
+* Every product has the fields name quantity price and sum;
+* Clicking on an item on the left should add it to the cart - Clicking on it the second time should increase the quantity - we don't want to see duplicates
+* At the bottom of the cart users see the total component which shows the total price x quantity of items selected.
+* *And at least 6 Bonus Features from these (or your own ideas):*
+  * A few of the products have a discount - "Pay for 2, get 3rd one for free". Implement this logic to your cart - so that total price of the item and all cart is updated correctly as user adds/removes items to the cart.
+  * On page reload the cart is not lost - you may use `localStorage`.
+  * Items appear/disappear from the cart with an animation (or fly from the shop to cart via an animation) - [Spring based animations](https://www.react-spring.io/) are really nice.
+  * Users can use [Drag & Drop](https://react-dnd.github.io/react-dnd/examples/dustbin/multiple-targets) to re-order the items, or add/remove them from shore to cart
+  * Every 1 000 000th visitor of the site sees a popup that he is the 1 000 000th visitor of this site and he wins a car
+  * There is a searchbar with an [autocomplete](https://material-ui.com/components/autocomplete/) above the products list - that filters the list of products as user types a search term
+  * User can toggle light/dark/pink? theme of the app.
+  * [`react-router`](https://reacttraining.com/react-router/web/guides/quick-start) or  is used to lead to the checkout page, where user goes through a [stepper](https://material-ui.com/components/steppers/) to enter his address and credit card details in a multi step process.
+  * Some items have limited quantity, and as user tries to increase the quantity on the cart, a [snackbar](https://material-ui.com/components/snackbars/#snackbars) appears with a warning notification that the stock is limited.
+  * Items in the shop that have a quantity 0, can't even be added to the cart (are disabled)
+  * The cart is accessible even for people with disabilities - it should be possible for people to use the full functionality even for people that are unable to use the mouse - they can use <kbd>TAB</kbd> or <kbd>Shift</kbd> + <kbd>TAB</kbd> or <kbd>Space</kbd> or <kbd>Enter</kbd> to navigate and interact with the cart. [This resource on MDN](https://developer.mozilla.org/en-US/docs/Web/Accessibility/Keyboard-navigable_JavaScript_widgets) could be useful.

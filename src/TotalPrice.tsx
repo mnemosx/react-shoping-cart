@@ -1,21 +1,20 @@
 import React from 'react';
-import { Paper, Grid } from '@material-ui/core';
+import { Paper, Typography } from '@material-ui/core';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
-import './App.css';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    root: {
-      flexGrow: 1,
-    },
     paper: {
       padding: theme.spacing(2),
       textAlign: 'center',
+      marginTop: '20px',
       color: theme.palette.text.secondary,
+      backgroundColor: '#7f3fb5',
     },
-    img: {
-      widht: 100,
-      height: 100
+    total: {
+      color: '#efeef6',
+      fontWeight: 700,
+      fontSize: 18,
     }
   }),
 );
@@ -27,9 +26,9 @@ interface TotalPriceProps {
 const TotalPrice: React.FC<TotalPriceProps> = ({ price }) => {
   const classes = useStyles();
   return (
-    <Grid item xs={12} className={classes.paper}>
-      <Paper className={classes.paper}> Total: ${price}</Paper>
-    </Grid>
+    <Paper className={classes.paper}>
+      <Typography className={classes.total} variant="button">Total: ${price}</Typography>
+    </Paper>
   )
 }
 

@@ -1,44 +1,52 @@
 import React from 'react'
-import { Grid, Button, Paper } from '@material-ui/core';
+import { Button, Card, Typography, CardMedia, Paper } from '@material-ui/core';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
-import './App.css';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    root: {
-      flexGrow: 1,
-    },
     paper: {
       padding: theme.spacing(2),
       textAlign: 'center',
       color: theme.palette.text.secondary,
     },
     img: {
-      widht: 100,
-      height: 100
+      widht: 50,
+      height: 50,
+      padding: theme.spacing(1),
+    },
+    card: {
+      display: 'flex',
+      alignItems: 'center',
     }
   }),
 );
 
 interface SelectedItemProps {
+  img: string;
   name: string;
   quantity: number;
   onRemove(): void;
 }
 
-const SelectedItem: React.FC<SelectedItemProps> = ({ name, quantity, onRemove }) => {
+const SelectedItem: React.FC<SelectedItemProps> = ({ img, name, quantity, onRemove }) => {
   const classes = useStyles();
   return (
-    <Paper className={classes.paper}>
-      <Grid container spacing={6}>
-        <Grid item>
-          {name} {quantity} pcs.
-      </Grid>
-        <Grid item style={{ cursor: 'pointer' }}>
-          <Button onClick={onRemove}>Remove</Button>
-        </Grid>
-      </Grid>
-    </Paper>
+    <Card className={classes.card} style={{ width: '100%', backgroundColor: '#f2eef7' }}>
+      <CardMedia className={classes.card} style={{ width: '20%', textAlign: 'center' }}>
+        <img style={{ margin: '0 auto' }}
+          className={classes.img}
+          alt={name}
+          src={img}
+        />
+      </CardMedia>
+      <Typography variant="body1" style={{ width: '50%', textAlign: 'left' }}>
+        {name}
+      </Typography>
+      <Typography variant="h5" color="textSecondary" style={{ width: '55px', textAlign: 'center' }}>
+        <Paper className={classes.paper}>{quantity}</Paper>
+      </Typography>
+      <Button onClick={onRemove} style={{ width: '15%', textAlign: 'center', margin: '20px', padding: '10px 0' }}>Remove</Button>
+    </Card>
   )
 }
 
