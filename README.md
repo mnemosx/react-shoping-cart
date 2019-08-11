@@ -6,14 +6,14 @@
 
 ### Criteria:
 
-* User sees a list of products on the left side;
-* User sees the list of products he has chosen on the right side;
-* Every product has the fields name quantity price and sum;
-* Clicking on an item on the left should add it to the cart - Clicking on it the second time should increase the quantity - we don't want to see duplicates
-* At the bottom of the cart users see the total component which shows the total price x quantity of items selected.
+* :heavy_check_mark: User sees a list of products on the left side;
+* :heavy_check_mark: User sees the list of products he has chosen on the right side;
+* :heavy_check_mark: Every product has the fields name quantity price and sum;
+* :heavy_check_mark: Clicking on an item on the left should add it to the cart - Clicking on it the second time should increase the quantity - we don't want to see duplicates
+* :heavy_check_mark: At the bottom of the cart users see the total component which shows the total price x quantity of items selected.
 * *And at least 6 Bonus Features from these (or your own ideas):*
   * A few of the products have a discount - "Pay for 2, get 3rd one for free". Implement this logic to your cart - so that total price of the item and all cart is updated correctly as user adds/removes items to the cart.
-  * On page reload the cart is not lost - you may use `localStorage`.
+  * :heavy_check_mark: On page reload the cart is not lost - you may use `localStorage`.
   * Items appear/disappear from the cart with an animation (or fly from the shop to cart via an animation) - [Spring based animations](https://www.react-spring.io/) are really nice.
   * Users can use [Drag & Drop](https://react-dnd.github.io/react-dnd/examples/dustbin/multiple-targets) to re-order the items, or add/remove them from shore to cart
   * Every 1 000 000th visitor of the site sees a popup that he is the 1 000 000th visitor of this site and he wins a car

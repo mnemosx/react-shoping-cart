@@ -3,10 +3,10 @@ import Product from './Product';
 import SelectedItem from './SelectedItem';
 import TotalPrice from './TotalPrice';
 import items from './ShopItems';
-import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
-import './App.css';
 import SearchAppBar from './TopBar';
+import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import { Grid } from '@material-ui/core';
+import './App.css';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -31,16 +31,19 @@ const calcTotalSum = (items: ShopItem[]): number => {
   return parseFloat(totalSum.toFixed(2))
 }
 
+// localstorage
+let localItems: ShopItem[] = [];
+let localStorageContent = localStorage.getItem('uniqueKEY')
+if (localStorageContent) {
+  localItems = JSON.parse(localStorageContent)
+}
+
 const App: React.FC = () => {
-  const [selectedItems, setSelectedItems] = useState<ShopItem[]>([])
+  const [selectedItems, setSelectedItems] = useState<ShopItem[]>(localItems)
   const classes = useStyles();
   return (
-    // <div className="App">
-    ///* Outer Window Container */ 
-    // className={classes.paper}
     <div>
       <SearchAppBar />
-
       <Grid container spacing={5} style={{
         padding: '60px',
         margin: 0,
@@ -56,7 +59,6 @@ const App: React.FC = () => {
               description={item.description}
               price={item.price}
               img={item.img}
-              //onSelect={() => { setSelectItems([...selectedItems, item]) }}
               onSelect={() => {
                 const cartItems = [...selectedItems];
                 let isCurrentItem = function (element: ShopItem): boolean {
@@ -68,6 +70,7 @@ const App: React.FC = () => {
                   item.quantity++;
                 }
                 setSelectedItems(cartItems)
+                localStorage.setItem('uniqueKEY', JSON.stringify(selectedItems));
               }}
             /></Grid>)}
         </Grid>
@@ -91,6 +94,8 @@ const App: React.FC = () => {
                       selectedItems.splice(index, 1)
                     }
                     setSelectedItems([...selectedItems])
+
+                    localStorage.setItem('uniqueKEY', JSON.stringify(selectedItems));
                   }}
                 // jaunā pogā remove all
                 // selectedItems.splice(index, 1)
