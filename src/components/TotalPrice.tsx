@@ -9,10 +9,8 @@ const useStyles = makeStyles((theme: Theme) =>
       textAlign: 'center',
       marginTop: '20px',
       color: theme.palette.text.secondary,
-      backgroundColor: '#7f3fb5',
     },
     total: {
-      color: '#efeef6',
       fontWeight: 700,
       fontSize: 18,
     }

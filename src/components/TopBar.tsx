@@ -7,6 +7,7 @@ import InputBase from '@material-ui/core/InputBase';
 import { createStyles, fade, Theme, makeStyles } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
+import ThemeSwitcher, { AppTheme } from '../components/ThemeSwitcher';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -60,11 +61,17 @@ const useStyles = makeStyles((theme: Theme) =>
         },
       },
     },
+
   }),
 );
 
-export default function SearchAppBar() {
+interface AppBarProps {
+  currentTheme: AppTheme;
+  setTheme: (theme: AppTheme) => void
+}
+const SearchAppBar: React.FC<AppBarProps> = ({ setTheme, currentTheme }) => {
   const classes = useStyles();
+
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -93,8 +100,13 @@ export default function SearchAppBar() {
               inputProps={{ 'aria-label': 'search' }}
             />
           </div>
+          <div style={{ margin: 20 }}>
+            <ThemeSwitcher setTheme={setTheme} currentTheme={currentTheme} />
+          </div>
         </Toolbar>
       </AppBar>
     </div>
   );
 }
+
+export default SearchAppBar

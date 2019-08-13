@@ -1,13 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Button, Card, Typography, CardMedia, Paper } from '@material-ui/core';
-import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
+import { makeStyles, createStyles, Theme } from '@material-ui/core';
+import { AppTheme, theme1, theme2 } from '../components/ThemeSwitcher';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     paper: {
       padding: theme.spacing(2),
       textAlign: 'center',
-      color: theme.palette.text.secondary,
     },
     img: {
       widht: 50,
@@ -31,7 +31,7 @@ interface SelectedItemProps {
 const SelectedItem: React.FC<SelectedItemProps> = ({ img, name, quantity, onRemove }) => {
   const classes = useStyles();
   return (
-    <Card className={classes.card} style={{ width: '100%', backgroundColor: '#f2eef7' }}>
+    <Card className={classes.card} style={{ width: '100%' }}>
       <CardMedia className={classes.card} style={{ width: '20%', textAlign: 'center' }}>
         <img style={{ margin: '0 auto' }}
           className={classes.img}

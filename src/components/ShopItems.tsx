@@ -1,13 +1,13 @@
 // Media imports //
-import bacon from './media/bacon.png';
-import britt from './media/britt.png';
-import irish from './media/irish.png';
-import jesus from './media/jesus.png';
-import trump from './media/trump.png';
-import unicorn from './media/unicorn.png';
-import mushroom from './media/mushroom.jpg';
-import shrimp from './media/shrimp.jpg';
-import weed from './media/weed.jpg';
+import bacon from '../media/bacon.png';
+import britt from '../media/britt.png';
+import irish from '../media/irish.png';
+import jesus from '../media/jesus.png';
+import trump from '../media/trump.png';
+import unicorn from '../media/unicorn.png';
+import mushroom from '../media/mushroom.jpg';
+import shrimp from '../media/shrimp.jpg';
+import weed from '../media/weed.jpg';
 
 interface ShopItem {
   quantity: number;

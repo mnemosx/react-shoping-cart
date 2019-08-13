@@ -1,12 +1,14 @@
 import React from 'react';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
+import { IconButton, Snackbar } from '@material-ui/core';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
+import Typography from '@material-ui/core/Typography';
 import CardMedia from '@material-ui/core/CardMedia';
+import CloseIcon from '@material-ui/icons/Close';
 import Button from '@material-ui/core/Button';
+import Card from '@material-ui/core/Card';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -25,6 +27,9 @@ const useStyles = makeStyles((theme: Theme) =>
     card: {
       maxWidth: 445,
     },
+    close: {
+      padding: theme.spacing(0.5),
+    },
   }),
 );
 
@@ -38,6 +43,18 @@ interface ProductProps {
 
 const Product: React.FC<ProductProps> = ({ name, price, img, description, onSelect }) => {
   const classes = useStyles();
+  const [open, setOpen] = React.useState(false);
+
+  function handleClick() {
+    setOpen(true);
+  }
+
+  function handleClose(event: React.SyntheticEvent | React.MouseEvent, reason?: string) {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpen(false);
+  }
   return (
     <Card className={classes.card}>
       <CardActionArea>
@@ -62,12 +79,37 @@ const Product: React.FC<ProductProps> = ({ name, price, img, description, onSele
           ${price}
         </Typography>
         <Button variant="contained" color="primary" className={classes.button}
-          onClick={() => onSelect()}>
+          onClick={() => { onSelect(); handleClick(); }}>
           Add to cart
           </Button>
       </CardActions>
+      <div>
+        <Snackbar
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'left',
+          }}
+          open={open}
+          autoHideDuration={3000}
+          onClose={handleClose}
+          ContentProps={{
+            'aria-describedby': 'message-id',
+          }}
+          message={<span id="message-id">Only few items left!</span>}
+          action={[
+            <IconButton
+              key="close"
+              aria-label="close"
+              color="inherit"
+              className={classes.close}
+              onClick={handleClose}
+            >
+              <CloseIcon />
+            </IconButton>,
+          ]}
+        />
+      </div>
     </Card>
-
   );
 }
 
