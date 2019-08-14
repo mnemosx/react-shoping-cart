@@ -3,7 +3,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 import React from "react";
 
-export const theme1 = createMuiTheme({
+export const theme2 = createMuiTheme({
   palette: {
     type: 'light',
     primary: {
@@ -15,7 +15,7 @@ export const theme1 = createMuiTheme({
   },
 });
 
-export const theme2 = createMuiTheme({
+export const theme1 = createMuiTheme({
   palette: {
     type: 'dark',
     primary: {

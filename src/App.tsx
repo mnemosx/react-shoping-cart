@@ -5,12 +5,12 @@ import TotalPrice from './components/TotalPrice';
 import items from './components/ShopItems';
 import SearchAppBar from './components/TopBar';
 import { AppTheme, theme1, theme2 } from './components/ThemeSwitcher';
-import { makeStyles, createStyles, Theme } from '@material-ui/core';
 import { Grid, CssBaseline } from '@material-ui/core';
 import { MuiThemeProvider } from '@material-ui/core/styles';
 
 interface ShopItem {
   quantity: number;
+  cartQuantity: number;
   name: string;
   description: string;
   price: number;
@@ -19,12 +19,12 @@ interface ShopItem {
 
 // get total price
 const calcTotalSum = (items: ShopItem[]): number => {
-  let totalSum = items.reduce((a, b) => a + b.price * b.quantity, 0)
+  let totalSum = items.reduce((a, b) => a + b.price * b.cartQuantity, 0)
   return parseFloat(totalSum.toFixed(2))
 }
 
 // localstorage
-//ERROR - pārlādējot lapu ar precēm localstorage, tās pašas precces pievienotjot neskaitās counter
+//ERROR - pārlādējot lapu ar precēm localstorage, tās pašas precces pievienojot neskaitās counter
 let localItems: ShopItem[] = [];
 let localStorageContent = localStorage.getItem('uniqueKEY')
 if (localStorageContent) {
@@ -38,7 +38,7 @@ const App: React.FC = () => {
   return (
     <MuiThemeProvider theme={currentTheme === AppTheme.theme1 ? theme1 : theme2}>
       <CssBaseline />
-      <div>
+      <div style={{ overflowX: 'hidden' }}>
         <SearchAppBar setTheme={(theme: AppTheme) => setCurrentTheme(theme)} currentTheme={currentTheme} />
         <Grid container spacing={5} style={{
           padding: '60px',
@@ -56,6 +56,7 @@ const App: React.FC = () => {
                 description={item.description}
                 price={item.price}
                 img={item.img}
+                quantity={item.quantity}
                 onSelect={() => {
                   const cartItems = [...selectedItems];
                   let isCurrentItem = function (element: ShopItem): boolean {
@@ -64,7 +65,8 @@ const App: React.FC = () => {
                   if (!cartItems.some(isCurrentItem)) {
                     cartItems.push(item);
                   } else {
-                    item.quantity++;
+                    item.cartQuantity++;
+                    item.quantity--
                   }
                   setSelectedItems(cartItems)
                   localStorage.setItem('uniqueKEY', JSON.stringify(selectedItems));
@@ -83,9 +85,11 @@ const App: React.FC = () => {
                     img={item.img}
                     name={item.name}
                     quantity={item.quantity}
+                    cartQuantity={item.cartQuantity}
                     onRemove={() => {
-                      if (item.quantity > 1) {
-                        item.quantity--
+                      if (item.cartQuantity > 0) {
+                        item.cartQuantity--
+                        item.quantity++
                       } else {
                         selectedItems.splice(index, 1)
                       }

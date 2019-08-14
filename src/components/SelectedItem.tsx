@@ -25,10 +25,11 @@ interface SelectedItemProps {
   img: string;
   name: string;
   quantity: number;
+  cartQuantity: number;
   onRemove(): void;
 }
 
-const SelectedItem: React.FC<SelectedItemProps> = ({ img, name, quantity, onRemove }) => {
+const SelectedItem: React.FC<SelectedItemProps> = ({ img, name, quantity, cartQuantity, onRemove }) => {
   const classes = useStyles();
   return (
     <Card className={classes.card} style={{ width: '100%' }}>
@@ -43,7 +44,7 @@ const SelectedItem: React.FC<SelectedItemProps> = ({ img, name, quantity, onRemo
         {name}
       </Typography>
       <Typography variant="h5" color="textSecondary" style={{ width: '55px', textAlign: 'center' }}>
-        <Paper className={classes.paper}>{quantity}</Paper>
+        <Paper className={classes.paper}>{cartQuantity}</Paper>
       </Typography>
       <Button onClick={onRemove} style={{ width: '15%', textAlign: 'center', margin: '20px', padding: '10px 0' }}>Remove</Button>
     </Card>

@@ -16,8 +16,8 @@ const useStyles = makeStyles((theme: Theme) =>
       flexGrow: 1,
     },
     img: {
-      widht: 100,
-      height: 100,
+      widht: 150,
+      height: 150,
       padding: theme.spacing(1)
     },
     button: {
@@ -38,15 +38,18 @@ interface ProductProps {
   description: string;
   price: number;
   img: string;
+  quantity: number;
   onSelect(): void
 }
 
-const Product: React.FC<ProductProps> = ({ name, price, img, description, onSelect }) => {
+const Product: React.FC<ProductProps> = ({ name, price, img, quantity, description, onSelect }) => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
   function handleClick() {
-    setOpen(true);
+    if (quantity < 5) {
+      setOpen(true);
+    }
   }
 
   function handleClose(event: React.SyntheticEvent | React.MouseEvent, reason?: string) {
@@ -78,10 +81,19 @@ const Product: React.FC<ProductProps> = ({ name, price, img, description, onSele
         <Typography variant="h6" style={{ flexGrow: 1 }}>
           ${price}
         </Typography>
-        <Button variant="contained" color="primary" className={classes.button}
-          onClick={() => { onSelect(); handleClick(); }}>
-          Add to cart
+
+        {quantity > 0 ? (
+          <Button variant="contained" color="primary" className={classes.button}
+            onClick={() => { onSelect(); handleClick(); }}>
+            Add to cart
           </Button>
+        ) : (
+            <Button variant="contained" color="secondary" className={classes.button} style={{ cursor: 'default' }}>
+              Sold Out
+        </Button>
+          )}
+
+
       </CardActions>
       <div>
         <Snackbar
@@ -90,7 +102,7 @@ const Product: React.FC<ProductProps> = ({ name, price, img, description, onSele
             horizontal: 'left',
           }}
           open={open}
-          autoHideDuration={3000}
+          autoHideDuration={2000}
           onClose={handleClose}
           ContentProps={{
             'aria-describedby': 'message-id',
