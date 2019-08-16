@@ -1,14 +1,13 @@
 import React from 'react';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import CardActionArea from '@material-ui/core/CardActionArea';
-import { IconButton, Snackbar } from '@material-ui/core';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import CardMedia from '@material-ui/core/CardMedia';
-import CloseIcon from '@material-ui/icons/Close';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
+import { useSnackbar } from 'notistack';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -44,20 +43,20 @@ interface ProductProps {
 
 const Product: React.FC<ProductProps> = ({ name, price, img, quantity, description, onSelect }) => {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
+  const { enqueueSnackbar } = useSnackbar();
 
-  function handleClick() {
-    if (quantity < 5) {
-      setOpen(true);
+  const handleClick = () => {
+    if (quantity < 5 && quantity > 2) {
+      enqueueSnackbar(`Last ${quantity - 1} items left!`, {
+        variant: 'warning',
+      });
+    } else if (quantity === 2) {
+      enqueueSnackbar(`One item left!`, {
+        variant: 'warning',
+      });
     }
-  }
+  };
 
-  function handleClose(event: React.SyntheticEvent | React.MouseEvent, reason?: string) {
-    if (reason === 'clickaway') {
-      return;
-    }
-    setOpen(false);
-  }
   return (
     <Card className={classes.card}>
       <CardActionArea>
@@ -81,46 +80,23 @@ const Product: React.FC<ProductProps> = ({ name, price, img, quantity, descripti
         <Typography variant="h6" style={{ flexGrow: 1 }}>
           ${price}
         </Typography>
-
-        {quantity > 0 ? (
-          <Button variant="contained" color="primary" className={classes.button}
-            onClick={() => { onSelect(); handleClick(); }}>
-            Add to cart
+        {quantity > 0 ? (<Button
+          variant="contained"
+          color="primary"
+          className={classes.button}
+          onClick={() => { onSelect(); handleClick(); }}>
+          Add to cart
           </Button>
         ) : (
-            <Button variant="contained" color="secondary" className={classes.button} style={{ cursor: 'default' }}>
+            <Button
+              variant="contained"
+              color="secondary"
+              className={classes.button}
+              style={{ cursor: 'default' }}>
               Sold Out
-        </Button>
+          </Button>
           )}
-
-
       </CardActions>
-      <div>
-        <Snackbar
-          anchorOrigin={{
-            vertical: 'bottom',
-            horizontal: 'left',
-          }}
-          open={open}
-          autoHideDuration={2000}
-          onClose={handleClose}
-          ContentProps={{
-            'aria-describedby': 'message-id',
-          }}
-          message={<span id="message-id">Only few items left!</span>}
-          action={[
-            <IconButton
-              key="close"
-              aria-label="close"
-              color="inherit"
-              className={classes.close}
-              onClick={handleClose}
-            >
-              <CloseIcon />
-            </IconButton>,
-          ]}
-        />
-      </div>
     </Card>
   );
 }

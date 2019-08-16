@@ -7,6 +7,7 @@ import SearchAppBar from './components/TopBar';
 import { AppTheme, theme1, theme2 } from './components/ThemeSwitcher';
 import { Grid, CssBaseline } from '@material-ui/core';
 import { MuiThemeProvider } from '@material-ui/core/styles';
+import { SnackbarProvider } from 'notistack';
 
 interface ShopItem {
   quantity: number;
@@ -34,80 +35,86 @@ if (localStorageContent) {
 const App: React.FC = () => {
   const [selectedItems, setSelectedItems] = useState<ShopItem[]>(localItems)
   const [currentTheme, setCurrentTheme] = useState<AppTheme>(AppTheme.theme1)
-
+  const cartItems = [...selectedItems];
   return (
     <MuiThemeProvider theme={currentTheme === AppTheme.theme1 ? theme1 : theme2}>
       <CssBaseline />
-      <div style={{ overflowX: 'hidden' }}>
-        <SearchAppBar setTheme={(theme: AppTheme) => setCurrentTheme(theme)} currentTheme={currentTheme} />
-        <Grid container spacing={5} style={{
-          padding: '60px',
-          margin: 0,
-        }}>
-          {/* Left Side */}
-          <Grid item container spacing={2} xs={8} style={{
-            textAlign: 'center',
-            alignContent: 'flex-start',
-            justifyContent: 'center',
+      <SnackbarProvider maxSnack={3} autoHideDuration={900} preventDuplicate>
+        <div style={{ overflowX: 'hidden' }}>
+          <SearchAppBar setTheme={(theme: AppTheme) => setCurrentTheme(theme)} currentTheme={currentTheme} />
+          <Grid container spacing={5} style={{
+            padding: '60px',
+            margin: 0,
           }}>
-            {items.map(item => <Grid item xs={4}>
-              <Product
-                name={item.name}
-                description={item.description}
-                price={item.price}
-                img={item.img}
-                quantity={item.quantity}
-                onSelect={() => {
-                  const cartItems = [...selectedItems];
-                  let isCurrentItem = function (element: ShopItem): boolean {
-                    return element.name === item.name;
-                  };
-                  if (!cartItems.some(isCurrentItem)) {
-                    cartItems.push(item);
-                  } else {
-                    item.cartQuantity++;
-                    item.quantity--
-                  }
-                  setSelectedItems(cartItems)
-                  localStorage.setItem('uniqueKEY', JSON.stringify(selectedItems));
-                }}
-              /></Grid>)}
-          </Grid>
-          {/* Right Side */}
-          <Grid item container xs={4} style={{
-            borderRadius: 15,
-            boxShadow: '0px 5px 35px 0px rgba(0, 0, 0, 0.3)',
-          }} >
-            <Grid item container alignContent='flex-start' spacing={2}>
-              {selectedItems.map((item, index) =>
-                <Grid item xs={12}>
-                  <SelectedItem
-                    img={item.img}
-                    name={item.name}
-                    quantity={item.quantity}
-                    cartQuantity={item.cartQuantity}
-                    onRemove={() => {
-                      if (item.cartQuantity > 0) {
-                        item.cartQuantity--
-                        item.quantity++
-                      } else {
-                        selectedItems.splice(index, 1)
-                      }
-                      setSelectedItems([...selectedItems])
-                      localStorage.setItem('uniqueKEY', JSON.stringify(selectedItems));
-                    }}
-                  // jaunā pogā remove all
-                  // selectedItems.splice(index, 1)
-                  // setSelectedItems([...selectedItems])
-                  /></Grid>)}
+            {/* Left Side */}
+            <Grid item container spacing={2} xs={8} style={{
+              textAlign: 'center',
+              alignContent: 'flex-start',
+              justifyContent: 'center',
+            }}>
+              {items.map(item => <Grid item xs={4}>
+                <Product
+                  name={item.name}
+                  description={item.description}
+                  price={item.price}
+                  img={item.img}
+                  quantity={item.quantity}
+                  onSelect={() => {
+                    let isCurrentItem = function (element: ShopItem): boolean {
+                      return element.name === item.name;
+                    };
+                    if (!cartItems.some(isCurrentItem)) {
+                      cartItems.push(item);
+                      item.cartQuantity++;
+                      item.quantity--
+                    } else {
+                      item.cartQuantity++;
+                      item.quantity--
+                    }
+                    setSelectedItems(cartItems)
+                    localStorage.setItem('uniqueKEY', JSON.stringify(cartItems));
+                  }}
+                /></Grid>)}
             </Grid>
-            <Grid item xs={12} spacing={2} style={{ height: 'auto', alignSelf: 'flex-end' }} >
-              <TotalPrice price={calcTotalSum(selectedItems)} />
+            {/* Right Side */}
+            <Grid item container xs={4} style={{
+              borderRadius: 15,
+              boxShadow: '0px 5px 35px 0px rgba(0, 0, 0, 0.3)',
+            }} >
+              <Grid item container alignContent='flex-start' spacing={2}>
+                {selectedItems.map((item, index) =>
+                  <Grid item xs={12}>
+                    <SelectedItem
+                      img={item.img}
+                      name={item.name}
+                      quantity={item.quantity}
+                      cartQuantity={item.cartQuantity}
+                      onRemove={() => {
+                        if (item.cartQuantity > 1) {
+                          item.cartQuantity--
+                          item.quantity++
+                        } else if (item.cartQuantity === 1) {
+                          selectedItems.splice(index, 1)
+                          item.cartQuantity--
+                          item.quantity++
+                          // console.log(item.quantity)
+                        }
+                        setSelectedItems([...selectedItems])
+                        localStorage.setItem('uniqueKEY', JSON.stringify(selectedItems));
+                      }}
+                    // jaunā pogā remove all
+                    // selectedItems.splice(index, 1)
+                    // setSelectedItems([...selectedItems])
+                    /></Grid>)}
+              </Grid>
+              <Grid item xs={12} spacing={2} style={{ height: 'auto', alignSelf: 'flex-end' }} >
+                <TotalPrice price={calcTotalSum(selectedItems)} />
+              </Grid>
             </Grid>
           </Grid>
-        </Grid>
-      </div>
-    </MuiThemeProvider>
+        </div>
+      </SnackbarProvider>
+    </MuiThemeProvider >
   );
 }
 

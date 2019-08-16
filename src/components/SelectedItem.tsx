@@ -1,7 +1,6 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Button, Card, Typography, CardMedia, Paper } from '@material-ui/core';
 import { makeStyles, createStyles, Theme } from '@material-ui/core';
-import { AppTheme, theme1, theme2 } from '../components/ThemeSwitcher';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -29,7 +28,7 @@ interface SelectedItemProps {
   onRemove(): void;
 }
 
-const SelectedItem: React.FC<SelectedItemProps> = ({ img, name, quantity, cartQuantity, onRemove }) => {
+const SelectedItem: React.FC<SelectedItemProps> = ({ img, name, cartQuantity, onRemove }) => {
   const classes = useStyles();
   return (
     <Card className={classes.card} style={{ width: '100%' }}>
