@@ -1,6 +1,9 @@
 import React from 'react';
 import { Paper, Typography } from '@material-ui/core';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
+import { ShopItem } from '../App';
+// import items from '../components/ShopItems';
+
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -16,6 +19,21 @@ const useStyles = makeStyles((theme: Theme) =>
     }
   }),
 );
+
+// get total price
+export const calcTotalSum = (items: ShopItem[]): number => {
+  let totalSum = items.reduce((a, b) => a + b.price * b.cartQuantity, 0)
+  // let discount = { shopItem.discount }
+  // if (item.discount === true) {
+
+  // }
+  // else {
+
+  // }
+  return parseFloat(totalSum.toFixed(2))
+}
+
+// let totalSumOfItem = totalSumOfIten - price * parseInt(cartQuantity / 3) 
 
 interface TotalPriceProps {
   price: number

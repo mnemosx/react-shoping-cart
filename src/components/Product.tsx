@@ -25,6 +25,10 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     card: {
       maxWidth: 445,
+      height: 350,
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'space-around',
     },
     close: {
       padding: theme.spacing(0.5),
