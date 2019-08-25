@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import Product from './components/Product';
 import SelectedItems from './components/SelectedItems';
 import TotalPrice from './components/TotalPrice';
-import items from './components/ShopItems';
 import SearchAppBar from './components/TopBar';
 import { AppTheme, theme1, theme2 } from './components/ThemeSwitcher';
 import { Grid, CssBaseline, CircularProgress } from '@material-ui/core';
@@ -96,7 +95,7 @@ const App: React.FC = () => {
               img: it.img,
               quantity: 0,
               cartQuantity: 0,
-              discount: false,
+              discount: '',
             } as ShopItem
           })
           .map(it => {
@@ -123,29 +122,29 @@ const App: React.FC = () => {
       justifyContent: 'center',
     }}>
       {isLoading ? <CircularProgress color="secondary" /> :
-                (products.map(it => <Grid item xs={4}>
-                  <Product
-                    name={it.name}
-                    description={it.description}
-                    price={it.price}
-                    img={it.img}
-                    quantity={it.quantity}
-                    onSelect={() => {
-                      let isCurrentItem = function (element: ShopItem): boolean {
-                        return element.name === it.name;
-                      };
-                      if (!cartItems.some(isCurrentItem)) {
-                        cartItems.push(it);
-                        it.cartQuantity++;
-                        it.quantity--
-                      } else {
-                        it.cartQuantity++;
-                        it.quantity--
-                      }
-                      setSelectedItems(cartItems)
-                      localStorage.setItem('uniqueKEY', JSON.stringify(cartItems));
-                    }}
-        /></Grid>)}
+        (products.map(it => <Grid item xs={4}>
+          <Product
+            name={it.name}
+            description={it.description}
+            price={it.price}
+            img={it.img}
+            quantity={it.quantity}
+            onSelect={() => {
+              let isCurrentItem = function (element: ShopItem): boolean {
+                return element.name === it.name;
+              };
+              if (!cartItems.some(isCurrentItem)) {
+                cartItems.push(it);
+                it.cartQuantity++;
+                it.quantity--
+              } else {
+                it.cartQuantity++;
+                it.quantity--
+              }
+              setSelectedItems(cartItems)
+              localStorage.setItem('uniqueKEY', JSON.stringify(cartItems));
+            }}
+          /></Grid>))}
     </Grid>
   }
 
