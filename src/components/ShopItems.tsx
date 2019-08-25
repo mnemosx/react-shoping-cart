@@ -10,13 +10,13 @@ import shrimp from '../media/shrimp.png';
 import weed from '../media/weed.png';
 
 interface ShopItem {
-  cartQuantity: number;
-  quantity: number;
   name: string;
   description: string;
   price: number;
   img: string;
-  discount: boolean;
+  quantity: number;
+  cartQuantity: number;
+  discount: string;
 }
 
 export const items: ShopItem[] = [

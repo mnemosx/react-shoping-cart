@@ -19,7 +19,7 @@
   * Every 1 000 000th visitor of the site sees a popup that he is the 1 000 000th visitor of this site and he wins a car
   * There is a searchbar with an [autocomplete](https://material-ui.com/components/autocomplete/) above the products list - that filters the list of products as user types a search term
   * :heavy_check_mark: User can toggle light/dark/pink? theme of the app.
-  * [`react-router`](https://reacttraining.com/react-router/web/guides/quick-start) or  is used to lead to the checkout page, where user goes through a [stepper](https://material-ui.com/components/steppers/) to enter his address and credit card details in a multi step process.
+  * :heavy_check_mark: [`react-router`](https://reacttraining.com/react-router/web/guides/quick-start) or  is used to lead to the checkout page, where user goes through a [stepper](https://material-ui.com/components/steppers/) to enter his address and credit card details in a multi step process.
   * :heavy_check_mark: Some items have limited quantity, and as user tries to increase the quantity on the cart, a [snackbar](https://material-ui.com/components/snackbars/#snackbars) appears with a warning notification that the stock is limited.
   * :heavy_check_mark: Items in the shop that have a quantity 0, can't even be added to the cart (are disabled)
   * The cart is accessible even for people with disabilities - it should be possible for people to use the full functionality even for people that are unable to use the mouse - they can use <kbd>TAB</kbd> or <kbd>Shift</kbd> + <kbd>TAB</kbd> or <kbd>Space</kbd> or <kbd>Enter</kbd> to navigate and interact with the cart. [This resource on MDN](https://developer.mozilla.org/en-US/docs/Web/Accessibility/Keyboard-navigable_JavaScript_widgets) could be useful.

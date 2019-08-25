@@ -1,0 +1,42 @@
+import CloseIcon from '@material-ui/icons/Close';
+import { IconButton, Snackbar } from '@material-ui/core';
+
+const [open, setOpen] = React.useState(false);
+
+function handleClick() {
+  if (quantity < 5 && quantity > 1) {
+    setOpen(true);
+  }
+}
+
+function handleClose(event: React.SyntheticEvent | React.MouseEvent, reason?: string) {
+  if (reason === 'clickaway') {
+    return;
+  }
+  setOpen(false);
+}
+
+<Snackbar
+  anchorOrigin={{
+    vertical: 'bottom',
+    horizontal: 'left',
+  }}
+  open={open}
+  autoHideDuration={1500}
+  onClose={handleClose}
+  ContentProps={{
+    'aria-describedby': 'message-id',
+  }}
+  message={<span id="message-id">Only few items left!</span>}
+  action={[
+    <IconButton
+      key="close"
+      aria-label="close"
+      color="inherit"
+      className={classes.close}
+      onClick={handleClose}
+    >
+      <CloseIcon />
+    </IconButton>,
+  ]}
+/>

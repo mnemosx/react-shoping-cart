@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-interface SelectedItemsProps {
+interface SelectedItemProps {
   img: string;
   name: string;
   quantity: number;
@@ -28,7 +28,7 @@ interface SelectedItemsProps {
   onRemove(): void;
 }
 
-const SelectedItems: React.FC<SelectedItemsProps> = ({ img, name, cartQuantity, onRemove }) => {
+const SelectedItems: React.FC<SelectedItemProps> = ({ img, name, cartQuantity, onRemove }) => {
   const classes = useStyles();
   return (
     <Card className={classes.card} style={{ width: '100%' }}>
