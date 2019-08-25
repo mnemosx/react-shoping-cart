@@ -28,7 +28,7 @@ interface SelectedItemProps {
   onRemove(): void;
 }
 
-const SelectedItem: React.FC<SelectedItemProps> = ({ img, name, cartQuantity, onRemove }) => {
+const SelectedItems: React.FC<SelectedItemProps> = ({ img, name, cartQuantity, onRemove }) => {
   const classes = useStyles();
   return (
     <Card className={classes.card} style={{ width: '100%' }}>
@@ -50,4 +50,4 @@ const SelectedItem: React.FC<SelectedItemProps> = ({ img, name, cartQuantity, on
   )
 }
 
-export default SelectedItem;
+export default SelectedItems;

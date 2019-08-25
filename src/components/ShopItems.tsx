@@ -10,12 +10,13 @@ import shrimp from '../media/shrimp.png';
 import weed from '../media/weed.png';
 
 interface ShopItem {
-  cartQuantity: number;
-  quantity: number;
   name: string;
   description: string;
   price: number;
   img: string;
+  quantity: number;
+  cartQuantity: number;
+  discount: string;
 }
 
 export const items: ShopItem[] = [
@@ -26,6 +27,7 @@ export const items: ShopItem[] = [
     img: bacon,
     quantity: 10,
     cartQuantity: 0,
+    discount: 'sale',
   },
   {
     name: 'British Accent Spray',
@@ -34,6 +36,7 @@ export const items: ShopItem[] = [
     img: britt,
     quantity: 7,
     cartQuantity: 0,
+    discount: '',
   },
   {
     name: 'Irish Accent Gum',
@@ -42,6 +45,7 @@ export const items: ShopItem[] = [
     img: irish,
     quantity: 16,
     cartQuantity: 0,
+    discount: '',
   },
   {
     name: 'Jesus Bandages',
@@ -50,6 +54,7 @@ export const items: ShopItem[] = [
     img: jesus,
     quantity: 34,
     cartQuantity: 0,
+    discount: 'sale',
   },
   {
     name: 'Trump Toilet Paper',
@@ -58,6 +63,7 @@ export const items: ShopItem[] = [
     img: trump,
     quantity: 22,
     cartQuantity: 0,
+    discount: 'sale',
   },
   {
     name: 'Unicorn Horn',
@@ -66,6 +72,7 @@ export const items: ShopItem[] = [
     img: unicorn,
     quantity: 15,
     cartQuantity: 0,
+    discount: '',
   },
   {
     name: 'Mushroom Shape Lipstick',
@@ -74,6 +81,7 @@ export const items: ShopItem[] = [
     img: mushroom,
     quantity: 12,
     cartQuantity: 0,
+    discount: '',
   },
   {
     name: 'Shrimp Neck Pillow',
@@ -82,6 +90,7 @@ export const items: ShopItem[] = [
     img: shrimp,
     quantity: 0,
     cartQuantity: 0,
+    discount: '',
   },
   {
     name: 'Weed Pillow',
@@ -90,6 +99,7 @@ export const items: ShopItem[] = [
     img: weed,
     quantity: 3,
     cartQuantity: 0,
+    discount: '',
   },
 ]
 
