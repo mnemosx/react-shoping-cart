@@ -8,6 +8,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import { useSnackbar } from 'notistack';
+import discountImg from '../media/discount.png';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -29,6 +30,19 @@ const useStyles = makeStyles((theme: Theme) =>
     close: {
       padding: theme.spacing(0.5),
     },
+    discount: {
+      width: 80,
+      height: 80,
+      position: "absolute",
+      margin: '20px 0px 0px 20px'
+    },
+    hidden: {
+      display: 'none'
+    },
+    discountImg: {
+      width: '100%',
+      transform: 'rotate(-30deg)',
+    }
   }),
 );
 
@@ -38,10 +52,11 @@ interface ProductProps {
   price: number;
   img: string;
   quantity: number;
+  discount: boolean;
   onSelect(): void
 }
 
-const Product: React.FC<ProductProps> = ({ name, price, img, quantity, description, onSelect }) => {
+const Product: React.FC<ProductProps> = ({ name, price, img, quantity, description, discount, onSelect }) => {
   const classes = useStyles();
   const { enqueueSnackbar } = useSnackbar();
 
@@ -61,6 +76,9 @@ const Product: React.FC<ProductProps> = ({ name, price, img, quantity, descripti
     <Card className={classes.card}>
       <CardActionArea>
         <CardMedia>
+          <div className={discount === true ? classes.discount : classes.hidden} >
+            <img className={classes.discountImg} alt='discount' src={discountImg} />
+          </div>
           <img
             className={classes.img}
             alt={name}

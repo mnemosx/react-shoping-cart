@@ -16,7 +16,7 @@ interface ShopItem {
   img: string;
   quantity: number;
   cartQuantity: number;
-  discount: string;
+  discount: boolean;
 }
 
 export const items: ShopItem[] = [
@@ -27,7 +27,7 @@ export const items: ShopItem[] = [
     img: bacon,
     quantity: 10,
     cartQuantity: 0,
-    discount: 'sale',
+    discount: true,
   },
   {
     name: 'British Accent Spray',
@@ -36,7 +36,7 @@ export const items: ShopItem[] = [
     img: britt,
     quantity: 7,
     cartQuantity: 0,
-    discount: '',
+    discount: false,
   },
   {
     name: 'Irish Accent Gum',
@@ -45,7 +45,7 @@ export const items: ShopItem[] = [
     img: irish,
     quantity: 16,
     cartQuantity: 0,
-    discount: '',
+    discount: false,
   },
   {
     name: 'Jesus Bandages',
@@ -54,7 +54,7 @@ export const items: ShopItem[] = [
     img: jesus,
     quantity: 34,
     cartQuantity: 0,
-    discount: 'sale',
+    discount: true,
   },
   {
     name: 'Trump Toilet Paper',
@@ -63,7 +63,7 @@ export const items: ShopItem[] = [
     img: trump,
     quantity: 22,
     cartQuantity: 0,
-    discount: 'sale',
+    discount: true,
   },
   {
     name: 'Unicorn Horn',
@@ -72,7 +72,7 @@ export const items: ShopItem[] = [
     img: unicorn,
     quantity: 15,
     cartQuantity: 0,
-    discount: '',
+    discount: false,
   },
   {
     name: 'Mushroom Shape Lipstick',
@@ -81,7 +81,7 @@ export const items: ShopItem[] = [
     img: mushroom,
     quantity: 12,
     cartQuantity: 0,
-    discount: '',
+    discount: false,
   },
   {
     name: 'Shrimp Neck Pillow',
@@ -90,7 +90,7 @@ export const items: ShopItem[] = [
     img: shrimp,
     quantity: 0,
     cartQuantity: 0,
-    discount: '',
+    discount: false,
   },
   {
     name: 'Weed Pillow',
@@ -99,7 +99,7 @@ export const items: ShopItem[] = [
     img: weed,
     quantity: 3,
     cartQuantity: 0,
-    discount: '',
+    discount: false,
   },
 ]
 

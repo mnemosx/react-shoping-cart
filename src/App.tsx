@@ -11,7 +11,6 @@ import { SnackbarProvider } from 'notistack';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Checkout from './components/Checkout';
 
-
 interface ShopItem {
   name: string;
   description: string;
@@ -19,49 +18,22 @@ interface ShopItem {
   img: string;
   quantity: number;
   cartQuantity: number;
-  discount: string
-}
-// res.send(`${(price * body.quantity) - (price * Math.floor(body.quantity / sale[0]))} EUR`);
-// get total price
-const calcTotalSum = (items: ShopItem[]): number => {
-  // let totalSum = items.reduce((a, b) => a + b.price * b.cartQuantity, 0)
-  // return parseFloat(totalSum.toFixed(2))
-
-
-  let sum = 0;
-  for (let i = 0; i < items.length; i++) {
-    // console.log(calculateTotalPriceForItem(items[i].price, items[i].cartQuantity, items[i].discount))
-
-    sum += calculateTotalPriceForItem(items[i].price, items[i].cartQuantity, items[i].discount);
-
-  }
-  return parseFloat(sum.toFixed(2));
+  discount: boolean
 }
 
-
-export function calculateTotalPriceForItem(price: number, cartQuantity: number, discount: string): number {
-
-  let priceWithDiscount = 0
-  if (discount === 'sale') {
-    if (cartQuantity % 3 === 0) {
-      priceWithDiscount = (price * cartQuantity) - (price * Math.floor((cartQuantity / 3)));
-      console.log(priceWithDiscount)
-      return priceWithDiscount;
-
-    } else if (cartQuantity % 3 === 1 && cartQuantity > 3) {
-      console.log(priceWithDiscount + price)
-      return priceWithDiscount + price;
-    }
-    else if (cartQuantity % 3 === 2 && cartQuantity > 3) {
-      return priceWithDiscount + price + price;
-    }
+// price for items of one kind
+export function calTotalPriceForItem(price: number, cartQuantity: number, discount: boolean): number {
+  if (discount === true) {
+    return (price * cartQuantity) - (price * Math.floor((cartQuantity / 3)));
   }
   return price * cartQuantity;
-  // isauc ar {calculateTotalPriceForItem(price, quantity, status)}
 }
 
-
-
+// get total price
+const calcTotalSum = (items: ShopItem[]): number => {
+  let totalSum = items.reduce((a, b) => a + calTotalPriceForItem(b.price, b.cartQuantity, b.discount), 0)
+  return parseFloat(totalSum.toFixed(2))
+}
 
 // localstorage
 //ERROR - pārlādējot lapu ar precēm localstorage, tās pašas precces pievienojot neskaitās counter
@@ -88,6 +60,7 @@ const App: React.FC = () => {
           name={item.name}
           description={item.description}
           price={item.price}
+          discount={item.discount}
           img={item.img}
           quantity={item.quantity}
           onSelect={() => {
@@ -166,7 +139,7 @@ const App: React.FC = () => {
         </SnackbarProvider>
       </MuiThemeProvider >
     </Router>
-  );
+  )
 }
 
 export default App;
