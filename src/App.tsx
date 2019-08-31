@@ -55,7 +55,7 @@ const App: React.FC = () => {
       alignContent: 'flex-start',
       justifyContent: 'center',
     }}>
-      {items.map(item => <Grid item xs={4}>
+      {items.map(item => <Grid item xs={4} key={item.name}>
         <Product
           name={item.name}
           description={item.description}
@@ -107,7 +107,7 @@ const App: React.FC = () => {
               }} >
                 <Grid item container alignContent='flex-start' spacing={2}>
                   {selectedItems.map((item, index) =>
-                    <Grid item xs={12}>
+                    <Grid item xs={12} key={item.name}>
                       <SelectedItems
                         img={item.img}
                         name={item.name}
