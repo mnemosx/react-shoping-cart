@@ -12,7 +12,7 @@
 * :heavy_check_mark: Clicking on an item on the left should add it to the cart - Clicking on it the second time should increase the quantity - we don't want to see duplicates
 * :heavy_check_mark: At the bottom of the cart users see the total component which shows the total price x quantity of items selected.
 * *And at least 6 Bonus Features from these (or your own ideas):*
-  * A few of the products have a discount - "Pay for 2, get 3rd one for free". Implement this logic to your cart - so that total price of the item and all cart is updated correctly as user adds/removes items to the cart.
+  * :heavy_check_mark: A few of the products have a discount - "Pay for 2, get 3rd one for free". Implement this logic to your cart - so that total price of the item and all cart is updated correctly as user adds/removes items to the cart.
   * On page reload the cart is not lost - you may use `localStorage`.
   * Items appear/disappear from the cart with an animation (or fly from the shop to cart via an animation) - [Spring based animations](https://www.react-spring.io/) are really nice.
   * Users can use [Drag & Drop](https://react-dnd.github.io/react-dnd/examples/dustbin/multiple-targets) to re-order the items, or add/remove them from shore to cart
